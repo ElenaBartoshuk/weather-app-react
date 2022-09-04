@@ -14,8 +14,8 @@ export default function FormattedSunset({ sunset, timezone }) {
     minutes = addZero(nd.getMinutes());
 
   return (
-    <div>
+    <>
       {hours}:{minutes}
-    </div>
+    </>
   );
 }

@@ -11,8 +11,8 @@ function App() {
         <div className="wrapper">
           <Form defaultCity="Malaga" />
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

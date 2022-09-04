@@ -14,7 +14,7 @@ html {
 
 .container {
   max-width: 950px;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 0 30px;
 }
 
@@ -223,7 +223,7 @@ input[type="search"]::-webkit-search-decoration {
 .units {
   display: flex;
   position: absolute;
-  left: 58%;
+  left: 59%;
   top: 17px;
 }
 
@@ -231,8 +231,15 @@ input[type="search"]::-webkit-search-decoration {
   font-size: 24px;
   font-weight: 500;
   color: #e01171;
-  padding: 0 5px;
+  padding: 0 3px;
   text-decoration: none;
+}
+
+.units span {
+  font-size: 24px;
+  font-weight: 500;
+  color: #e01171;
+  text-decoration: underline;
 }
 
 .units a:hover {
@@ -274,7 +281,6 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 .current__icon canvas {
-  width: 15%;
   margin: 5px auto;
 }
 
@@ -619,11 +625,14 @@ input[type="search"]::-webkit-search-decoration {
     margin-bottom: 10px;
   }
 
+  .search {
+    justify-content: center;
+  }
   .search-btn {
     margin-left: 0;
   }
-  .current__icon img {
-    width: 25%;
+  .current__icon canvas {
+    width: 28%;
   }
   .curent__item-description::before {
     left: 13%;
@@ -717,7 +726,7 @@ input[type="search"]::-webkit-search-decoration {
   }
 
   .curent__item-description::before {
-    left: -2%;
+    left: -5%;
   }
 
   .current__item-humidity::before {
@@ -742,8 +751,8 @@ input[type="search"]::-webkit-search-decoration {
     font-size: 18px;
   }
 
-  .current__icon img {
-    width: 30%;
+  .current__icon canvas {
+    width: 40%;
   }
 
   .curent__item-description::before {

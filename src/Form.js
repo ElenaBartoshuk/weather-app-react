@@ -8,6 +8,7 @@ import Forecast from "./Forecast";
 export default function Form(props) {
   const [weather, setWeather] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+  // const [value, setValue] = useState("");
 
   function handleResponse(response) {
     setWeather({
@@ -30,12 +31,19 @@ export default function Form(props) {
     });
   }
 
-  console.log(weather.sunrise);
-
   function handleSubmit(event) {
     event.preventDefault();
-    search();
+    if (city) {
+      search();
+    } else {
+      alert(`🙌 Please enter a city`);
+    }
   }
+
+  // function handleClear(event) {
+  //   event.preventDefault();
+  //   setValue("");
+  // }
 
   function updateCity(event) {
     setCity(event.target.value);
@@ -44,7 +52,17 @@ export default function Form(props) {
   function search() {
     const apiKey = "29d24da46731d2929ff30f83f29c34d7";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    axios.get(apiUrl).then(handleResponse).catch(error);
+  }
+
+  function error(error) {
+    if (error) {
+      alert(
+        `🖍 Please check the spelling of city "${
+          city.charAt(0).toUpperCase() + city.slice(1)
+        }" name and type it again`
+      );
+    }
   }
 
   if (weather.ready) {
@@ -55,17 +73,15 @@ export default function Form(props) {
             <img src={Search} alt="search icon" />
             <input
               type="search"
-              id="city"
               placeholder="Enter a city"
               autoFocus
               autoComplete="off"
-              required
               onChange={updateCity}
             />
           </div>
           <button
             className="btn search-btn"
-            id="search-btn"
+            // onClick={handleClear}
             type="submit"
             autoComplete="off"
           >

@@ -14,8 +14,8 @@ export default function FormattedSunrise({ sunrise, timezone }) {
     minutes = addZero(nd.getMinutes());
 
   return (
-    <div>
+    <>
       {hours}:{minutes}
-    </div>
+    </>
   );
 }
