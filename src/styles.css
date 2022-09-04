@@ -88,7 +88,7 @@ input[type="search"]::-webkit-search-decoration {
   width: 50%;
 }
 
-.icon__before svg {
+.icon__before img {
   position: absolute;
   display: inline-block;
   width: 20px;
@@ -263,7 +263,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .current__date {
   font-size: 24px;
-  /* margin-bottom: 10px; */
+  margin-bottom: 15px;
 }
 
 .current__icon {
@@ -273,7 +273,7 @@ input[type="search"]::-webkit-search-decoration {
   width: 70%;
 }
 
-.current__icon img {
+.current__icon canvas {
   width: 15%;
   margin: 5px auto;
 }
