@@ -12,6 +12,13 @@ export default function Form(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [photos, setPhotos] = useState([]);
 
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(searchLocation);
+      setPhotos([]);
+    }
+  }
+
   function handleResponse(response) {
     setWeather({
       ready: true,
@@ -42,19 +49,21 @@ export default function Form(props) {
     }
   }
 
-  // function handleClear(event) {
-  //   event.preventDefault();
-  //   setValue("");
-  // }
-
   function updateCity(event) {
     setCity(event.target.value);
   }
 
   function handlePexelsResponse(response) {
-    console.log(response.data.photos);
     setPhotos(response.data.photos);
     setCity("");
+  }
+
+  function searchLocation(position) {
+    let apiKey = "29d24da46731d2929ff30f83f29c34d7";
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    axios.get(url).then(handleResponse).catch(error);
   }
 
   function search() {
@@ -82,28 +91,29 @@ export default function Form(props) {
   if (weather.ready) {
     return (
       <>
-        <form className="search" id="form" onSubmit={handleSubmit}>
-          <div className="icon__before">
-            <img src={Search} alt="search icon" />
-            <input
-              type="search"
-              value={city}
-              placeholder="Enter a city"
-              autoFocus
-              autoComplete="off"
-              onChange={updateCity}
-            />
-          </div>
-          <button
-            className="btn search-btn"
-            // onClick={handleClear}
-            type="submit"
-            autoComplete="off"
-          >
-            Search
-          </button>
+        <div className="buttons">
+          <form className="search" onSubmit={handleSubmit}>
+            <div className="icon__before">
+              <img src={Search} alt="search icon" />
+              <input
+                type="search"
+                value={city}
+                placeholder="Enter a city"
+                autoFocus
+                autoComplete="off"
+                onChange={updateCity}
+              />
+            </div>
+            <button className="btn search-btn" type="submit" autoComplete="off">
+              Search
+            </button>
+          </form>
           <div className="current-btnicon">
-            <button className="btn current-btn" id="current-btn" type="submit">
+            <button
+              className="btn current-btn"
+              onClick={() => getLocation()}
+              type="submit"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -115,7 +125,7 @@ export default function Form(props) {
               Current
             </button>
           </div>
-        </form>
+        </div>
         <Current data={weather} />
         <Forecast coordinates={weather.coordinates} />
         <Photos photos={photos} />
@@ -126,22 +136,3 @@ export default function Form(props) {
     return <InfinitySpin width="150" color="#0f0766" />;
   }
 }
-
-// function getLocation(params) {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition);
-//   } else {
-//     console.log("Geolocation is not supported by this browser");
-//   }
-// }
-
-// function showPosition(position) {
-//   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=29d24da46731d2929ff30f83f29c34d7&units=metric`;
-//   axios.get(url).then(({ data }) => console.log(data));
-// }
-
-// return (
-//   <div className="App">
-//     <button onClick={() => getLocation()}>Search</button>
-//   </div>
-// );

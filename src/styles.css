@@ -44,6 +44,10 @@ img {
   display: block;
 }
 
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
 .current,
 .details {
   text-align: center;
@@ -56,7 +60,7 @@ img {
 .search {
   margin-bottom: 20px;
   display: flex;
-  flex-wrap: wrap;
+  width: 70%;
 }
 
 .search input {
@@ -85,7 +89,7 @@ input[type="search"]::-webkit-search-decoration {
 .icon__before {
   position: relative;
   display: inline;
-  width: 50%;
+  width: 100%;
 }
 
 .icon__before img {
@@ -140,7 +144,7 @@ input[type="search"]::-webkit-search-decoration {
   position: absolute;
   display: inline-block;
   left: 20%;
-  top: 24%;
+  top: 17%;
 }
 
 .current-btnicon svg path {
@@ -607,6 +611,11 @@ input[type="search"]::-webkit-search-decoration {
 
   .btn {
     font-size: 16px;
+    margin-left: 10px;
+  }
+
+  .current-btn {
+    padding: 11px 20px 11px 43px;
   }
 
   .current__city {
@@ -646,8 +655,22 @@ input[type="search"]::-webkit-search-decoration {
   }
 
   .search {
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
   }
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .current-btnicon svg {
+    left: 18%;
+    top: 25%;
+  }
+
   .search-btn {
     margin-left: 0;
   }
