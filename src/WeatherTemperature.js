@@ -34,9 +34,7 @@ export default function WeatherTemperature({ temperature, feelslike, wind }) {
         </div>
         <div className="current__item current__item-wind">
           Wind speed:{" "}
-          <span className="current__value" id="wind">
-            {Math.round(wind)} m/s
-          </span>
+          <span className="current__value">{Math.round(wind)} m/s</span>
         </div>
       </>
     );

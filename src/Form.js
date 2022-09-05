@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { InfinitySpin } from "react-loader-spinner";
 
 import Search from "./images/search-icon.svg";
 import Current from "./Current";
 import Forecast from "./Forecast";
+import Photos from "./Photos";
 
 export default function Form(props) {
   const [weather, setWeather] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
-  // const [value, setValue] = useState("");
+  const [photos, setPhotos] = useState([]);
 
   function handleResponse(response) {
     setWeather({
@@ -49,10 +51,22 @@ export default function Form(props) {
     setCity(event.target.value);
   }
 
+  function handlePexelsResponse(response) {
+    console.log(response.data.photos);
+    setPhotos(response.data.photos);
+    setCity("");
+  }
+
   function search() {
     const apiKey = "29d24da46731d2929ff30f83f29c34d7";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse).catch(error);
+
+    let pexelsApiKey =
+      "563492ad6f91700001000001bc1878da3ccc4a229c4cf2524dd22df8";
+    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${city}&per_page=9`;
+    let headers = { Authorization: `${pexelsApiKey}` };
+    axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
   }
 
   function error(error) {
@@ -73,6 +87,7 @@ export default function Form(props) {
             <img src={Search} alt="search icon" />
             <input
               type="search"
+              value={city}
               placeholder="Enter a city"
               autoFocus
               autoComplete="off"
@@ -103,11 +118,12 @@ export default function Form(props) {
         </form>
         <Current data={weather} />
         <Forecast coordinates={weather.coordinates} />
+        <Photos photos={photos} />
       </>
     );
   } else {
     search();
-    return "Loading...";
+    return <InfinitySpin width="150" color="#0f0766" />;
   }
 }
 

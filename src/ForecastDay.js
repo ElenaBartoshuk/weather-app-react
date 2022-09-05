@@ -45,10 +45,7 @@ export default function ForecastDay({ data }) {
       </div>
       <div className="forecast__precipitation">
         Rain:
-        <span
-          className="details__value forecast__precipitation-value"
-          id="precipitation"
-        >
+        <span className="details__value forecast__precipitation-value">
           {Math.round(data.pop * 100)} %
         </span>
       </div>

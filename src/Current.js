@@ -10,7 +10,7 @@ export default function Current({ data }) {
   return (
     <>
       <div className="current">
-        <h1 className="current__city" id="current-city">
+        <h1 className="current__city">
           {data.city}, {data.country}
         </h1>
         <div className="current__date">
@@ -18,16 +18,11 @@ export default function Current({ data }) {
         </div>
         <div className="current__icon">
           <WeatherIcon code={data.icon} size={80} />
-          <div className="curent__item-description" id="description">
-            {data.description}
-          </div>
+          <div className="curent__item-description">{data.description}</div>
         </div>
         <div className="current__items">
           <div className="current__item current__item-humidity">
-            Humidity:{" "}
-            <span className="current__value" id="humidity">
-              {data.humidity} %
-            </span>
+            Humidity: <span className="current__value">{data.humidity} %</span>
           </div>
           <WeatherTemperature
             temperature={data.temperature}
@@ -40,7 +35,7 @@ export default function Current({ data }) {
         <div className="details__row details__row-sun">
           <div className="details__sunrise">
             Sunrise:
-            <span className="details__value" id="sunrise">
+            <span className="details__value">
               <FormattedSunrise
                 sunrise={data.sunrise}
                 timezone={data.timezone}
@@ -49,7 +44,7 @@ export default function Current({ data }) {
           </div>
           <div className="details__sunset">
             Sunset:
-            <span className="details__value" id="sunset">
+            <span className="details__value">
               <FormattedSunset sunset={data.sunset} timezone={data.timezone} />
             </span>
           </div>
@@ -57,15 +52,11 @@ export default function Current({ data }) {
         <div className="details__row details__row-temp">
           <div className="details__high-temp">
             High:
-            <span className="details__value" id="high-temp">
-              {Math.round(data.tempmax)}°
-            </span>
+            <span className="details__value">{Math.round(data.tempmax)}°</span>
           </div>
           <div className="details__low-temp">
             Low:
-            <span className="details__value" id="low-temp">
-              {Math.round(data.tempmin)}°
-            </span>
+            <span className="details__value">{Math.round(data.tempmin)}°</span>
           </div>
         </div>
       </div>
